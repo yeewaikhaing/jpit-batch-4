@@ -1,0 +1,16 @@
+com\mmit\shop\model\entity\Users$ACCESS_LEVEL.class
+com\mmit\shop\bean\BrandBean.class
+com\mmit\shop\model\entity\Brand.class
+com\mmit\shop\model\service\UsersService.class
+com\mmit\shop\model\converter\BrandConverter.class
+com\mmit\shop\bean\CategoryBean.class
+com\mmit\shop\model\entity\Item$ClothType.class
+com\mmit\shop\model\entity\Category.class
+com\mmit\shop\model\service\BrandService.class
+com\mmit\shop\model\entity\Users.class
+com\mmit\shop\model\service\CategoryService.class
+com\mmit\shop\bean\ItemBean.class
+com\mmit\shop\bean\UserBean.class
+com\mmit\shop\model\converter\CategoryConverter.class
+com\mmit\shop\model\service\ItemService.class
+com\mmit\shop\model\entity\Item.class

@@ -1,0 +1,110 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"> 
+
+<ui:composition template="/template/admin-template.xhtml">
+	<ui:define name="main-title">Item</ui:define>
+	<ui:define name="sub-title">All Item</ui:define>
+	<ui:define name="btn-action">
+		<h:link outcome="/admin/item-add" styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+			<i class="fas fa-plus fa-sm text-white-50"></i> Add
+		</h:link>
+	</ui:define>
+	<ui:define name="main-contents">
+		<div class="card shadow mb-4">
+			<div class="card-header py-3">
+            	<h6 class="m-0 font-weight-bold text-primary">Item Table</h6>
+            </div>
+            <div class="card-body">
+            	<div class="table-responsive">
+            		<h:dataTable binding="#{tb}" value="#{itemBean.items}" var="item" styleClass="table table-bordered" id="dataTable" width="100%">
+            			<h:column>
+            				<f:facet name="header">No</f:facet>
+            				#{tb.rowIndex+1}
+            			</h:column>
+            			<h:column>
+            				<f:facet name="header">Name</f:facet>
+            				<h:commandLink action="#{itemBean.getItemInfo(item.id)}" onclick="$('#itemModal').modal('show')">
+            					 #{item.name} <i class="fas fa-paper-plane fa-sm"></i>
+            					 <f:ajax render="itemForm"></f:ajax>
+            				</h:commandLink>
+            			</h:column>
+            			<h:column>
+            				<f:facet name="header">Gender</f:facet>
+            				#{item.type}
+            			</h:column>
+            			<h:column>
+            				<f:facet name="header">Brand</f:facet>
+            				#{item.brand.name}
+            			</h:column>
+            			<h:column>
+            				<f:facet name="header">Category</f:facet>
+            				#{item.category.name}
+            			</h:column>
+            			<h:column>
+            				<f:facet name="header">Price</f:facet>
+            				#{item.price}
+            			</h:column>
+            			<h:column>
+            				<f:facet name="header">Action</f:facet>
+            				<h:form>
+            					<h:link outcome="/admin/item-add">
+            						<i class="fas fa-edit fa-sm"></i> Edit
+            						<f:param name="id" value="#{item.id}"></f:param>
+            					</h:link> |
+            					<h:commandLink styleClass="text-danger" onclick="if(!confirm('Are you sure to delete?')) return false;">
+            						<i class="fas fa-minus fa-sm"></i> Remove
+            					</h:commandLink>
+            				</h:form>
+            			</h:column>
+            		</h:dataTable>
+            	</div>
+            </div>
+		</div>
+		<!-- Item Modal -->
+		<div class="fade modal" id="itemModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<h5>Item Info</h5>
+						<hr />
+						<h:form styleClass="form" id="itemForm">
+							<div class="form-row">
+								<div class="col-4">
+									<h:graphicImage name="noimage.jpg" library="img" width="150" height="150"/>
+								</div>
+								<div class="col" style="font-size:0.9em">
+									<div class="row mb-2">
+										<div class="col-4"> <span>Create At</span> </div>
+										<div class="col"> <h:outputText value="#{itemBean.item.created_at}" /> </div>
+									</div>
+									<div class="row mb-2">
+										<div class="col-4"> <span>Create By</span> </div>
+										<div class="col"> <h:outputText value="#{itemBean.item.created_by.username}" /> </div>
+									</div>
+									<div class="row mb-2">
+										<div class="col-4"> <span>Update At</span> </div>
+										<div class="col"> <h:outputText value="#{itemBean.item.updated_at}" /> </div>
+									</div>
+									<div class="row">
+										<div class="col-4"> <span>Update By</span> </div>
+										<div class="col"> <h:outputText value="#{itemBean.item.updated_by.username}" /> </div>
+									</div>
+								</div>
+							</div>
+							<hr />
+							<div class="form-group text-center mt-3">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							</div>
+						</h:form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

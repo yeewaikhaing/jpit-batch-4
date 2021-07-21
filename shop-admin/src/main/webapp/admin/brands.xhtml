@@ -1,0 +1,115 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"> 
+
+<ui:composition template="/template/admin-template.xhtml">
+	<ui:define name="main-title">Brand</ui:define>
+	<ui:define name="sub-title">All Brand</ui:define>
+	<ui:define name="btn-action">
+		<h:commandLink action="#{brandBean.retrieveBrandInfo(0)}"  onclick="$('#brandModal').modal('show');" styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+			<i class="fas fa-plus fa-sm text-white-50"></i> Add
+			<f:ajax render="editForm"></f:ajax>
+		</h:commandLink>
+		
+	</ui:define>
+	<ui:define name="main-contents">
+		<div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Category Table</h6>
+                        </div>
+                        <div class="card-body">
+                        	
+                            <div class="table-responsive">
+                            	
+                            		<h:dataTable binding="#{tb}" value="#{brandBean.brands}" var="b" styleClass="table table-bordered" id="dataTable" width="100%">
+	                            		<h:column>
+	                            			<f:facet name="header">No</f:facet>
+	                            			#{tb.rowIndex+1}
+	                            		</h:column>
+	                            		<h:column>
+	                            			<f:facet name="header">Name</f:facet>
+	                            			#{b.name}
+	                            		</h:column>
+	                            		<h:column>
+	                            			<f:facet name="header">Created at</f:facet>
+	                            			#{b.created_at}
+	                            		</h:column>
+	                            		<h:column>
+	                            			<f:facet name="header">Created by</f:facet>
+	                            			#{b.created_by.username}
+	                            		</h:column>
+	                            		<h:column>
+	                            			<f:facet name="header">Updated at</f:facet>
+	                            			#{b.updated_at}
+	                            		</h:column>
+	                            		<h:column>
+	                            			<f:facet name="header">Updated by</f:facet>
+	                            			#{b.updated_by.username}
+	                            		</h:column>
+	                            		<h:column>
+	                            			<f:facet name="header">Action</f:facet>
+	                            			<h:form>
+	                            				<h:commandLink action="#{brandBean.retrieveBrandInfo(b.id)}" onclick="$('#brandModal').modal('show');">
+		                            				<i class="fas fa-edit fa-sm"></i> Edit
+		                            				<f:ajax render="editForm"></f:ajax>
+		                            			</h:commandLink> | 
+		                            			<h:commandLink onclick="if(!confirm('Are you sure to delete?')) return false;" action="#{brandBean.remove(b.id)}" styleClass="text-danger">
+		                            				<i class="fas fa-minus fa-sm"></i> Remove
+		                            			</h:commandLink>
+	                            			</h:form>
+	                            		</h:column>
+	                            	</h:dataTable>
+                            	
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <!-- Brand Modal -->
+                    <div class="modal fade" id="brandModal">
+                    	<h:form id="editForm">
+                    		<div class="modal-dialog">
+	                    		<div class="modal-content">
+	                    			<div class="modal-header">
+	                    				<h5 class="modal-title"> #{brandBean.brand.id == 0 ? 'Add' : 'Edit'} Brand</h5>
+	                    				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          	<span aria-hidden="true">x</span>
+								        </button>
+	                    			</div>
+	                    			<div class="modal-body">
+	                    				<div class="form-group col-8">
+	                    					<label>Brand Name</label>
+	                    					<h:inputText onkeyup="return check()"  value="#{brandBean.brand.name}" styleClass="form-control brandName" p:placeholder="Enter Brand Name">
+	                    						<f:ajax listener="#{brandBean.checkBrand()}" execute="@form" render="errMsg btn-save" event="keyup" ></f:ajax>
+	                    					</h:inputText>
+	                    					<small>
+	                    						<h:outputText value="#{brandBean.message}" styleClass="text-danger" id="errMsg"/>
+	                    					</small>
+	                    				</div>
+	                    			</div>
+	                    			 <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								        <h:commandButton id="btn-save" action="#{brandBean.save()}" value="Save" styleClass="btn btn-primary saveBtn" disabled="#{brandBean.saveButtonDisabled}"/>
+								        
+								      </div>
+								      
+	                    		</div>
+	                    	</div>
+                    	</h:form>
+                    </div>
+	</ui:define>
+	<ui:define name="js">
+		<script type="text/javascript">
+		function check(){
+				if($.trim($('.brandName').val()) == '')
+					{
+					$('.saveBtn').attr('disabled','disabled');
+					return false;
+					}
+			}
+		</script>
+	</ui:define>
+</ui:composition>
+</html>
