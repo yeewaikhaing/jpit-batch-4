@@ -77,15 +77,18 @@
 	                    			<div class="modal-body">
 	                    				<div class="form-group col-8">
 	                    					<label>Category Name</label>
-	                    					<h:inputText value="#{categoryBean.categoy.name}" styleClass="form-control catName" p:placeholder="Enter Category Name" />
-	                    					<small>
-	                    						<span class="errMsg text-danger"></span>
+	                    					<h:inputText onkeyup="return check()" value="#{categoryBean.categoy.name}" styleClass="form-control catName" p:placeholder="Enter Category Name">
+	                    						<f:ajax  event="keyup" render="btn-save errMsg" listener="#{categoryBean.checkCategoryName()}" execute="@form"></f:ajax>
+	                    					</h:inputText>
+	                    					<small class="text-danger">
+	                    						<h:outputText value="#{categoryBean.message}" id="errMsg" styleClass="errMsg"/>
+	                    						
 	                    					</small>
 	                    				</div>
 	                    			</div>
 	                    			 <div class="modal-footer">
 								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								        <h:commandButton onclick="return check()" action="#{categoryBean.save()}" value="Save" styleClass="btn btn-primary btn-save"/>
+								        <h:commandButton id="btn-save" onclick="return check()" action="#{categoryBean.save()}" value="Save" styleClass="btn btn-primary btn-save" disabled="#{categoryBean.saveButtonDisabled}"/>
 								        
 								      </div>
 	                    		</div>
@@ -96,8 +99,9 @@
 	<ui:define name="js">
 		<script type="text/javascript">
 			function check(){
-					if($('.catName').val() == ''){
-						$('.errMsg').html('Require Category Name')
+					if($.trim($('.catName').val()) == ''){
+						$('.btn-save').attr('disabled','disabled');
+						$('errMsg').html("");
 						return false;
 						}
 					

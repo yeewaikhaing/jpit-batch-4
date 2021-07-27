@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,6 +16,8 @@ import static javax.persistence.EnumType.STRING;
  */
 @Entity
 @NamedQuery(name = "User.findAll",query = "SELECT u FROM Users u")
+@NamedQuery(name="Users.findByEmail",query="SELECT u FROM Users u WHERE u.email = :email")
+@NamedQuery(name="User.findCount",query="SELECT COUNT(u) FROM Users u")
 public class Users implements Serializable {
 
 	
@@ -25,7 +28,9 @@ public class Users implements Serializable {
 	private int id;
 	private String username;
 	@Column(unique = true)
+	@NotEmpty(message = "Require Email")
 	private String email;
+	@NotEmpty(message="Requre Password")
 	private String password;
 	private String phone;
 	private String address;

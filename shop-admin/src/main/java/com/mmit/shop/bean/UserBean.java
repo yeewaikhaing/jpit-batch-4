@@ -25,7 +25,8 @@ public class UserBean implements Serializable{
 	private UsersService service;
 	
 	private Users user;
-	
+	@Inject
+	private LoginBean loginbean;
 	@PostConstruct
 	public void init() {
 		String id=FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
@@ -38,6 +39,8 @@ public class UserBean implements Serializable{
 	public String save() {
 		try {
 			service.save(user);
+			if(user.getId() == loginbean.getLoginUser().getId())
+				loginbean.setLoginUser(user);
 		} catch (EJBException e) {
 			FacesContext cxt=FacesContext.getCurrentInstance();
 			cxt.addMessage("userForm:email", new FacesMessage("Email is already exist"));
@@ -50,6 +53,8 @@ public class UserBean implements Serializable{
 		service.remove(id);
 		return "/admin/users?faces-redirect=true";
 	}
+	
+	
 	public List<Users> getUsers(){
 		return service.findAll();
 	}
