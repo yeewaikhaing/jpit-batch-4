@@ -22,8 +22,10 @@ public class UsersService {
 	private Pbkdf2PasswordHash encoder;
 	@Inject
 	private LoginBean loginbean;
-	public List<Users> findAll(){
-		return em.createNamedQuery("User.findAll",Users.class).getResultList();
+	public List<Users> findAllWithoutMe(){
+		return em.createNamedQuery("User.findAll",Users.class)
+				.setParameter("email", loginbean.getLoginUser().getEmail())
+				.getResultList();
 	}
 	
 	public Users findById(int id) {

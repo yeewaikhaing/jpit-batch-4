@@ -19,6 +19,7 @@ import static javax.persistence.EnumType.STRING;
  */
 @Entity
 @NamedQuery(name="Item.findAll",query = "SELECT i From Item i")
+@NamedQuery(name="Item.findPhotoById",query="SELECT i.photo FROM Item i WHERE i.id = :itemId")
 public class Item implements Serializable {
 
 	

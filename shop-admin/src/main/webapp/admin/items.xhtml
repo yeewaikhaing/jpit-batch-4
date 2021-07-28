@@ -9,6 +9,9 @@
 	<ui:define name="main-title">Item</ui:define>
 	<ui:define name="sub-title">All Item</ui:define>
 	<ui:define name="btn-action">
+		<a href="#" class="btn btn-danger btn-sm">
+			<i class="fas fa-upload fa-sm"></i> Upload
+		</a>
 		<h:link outcome="/admin/item-add" styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
 			<i class="fas fa-plus fa-sm text-white-50"></i> Add
 		</h:link>
@@ -55,7 +58,7 @@
             						<i class="fas fa-edit fa-sm"></i> Edit
             						<f:param name="id" value="#{item.id}"></f:param>
             					</h:link> |
-            					<h:commandLink styleClass="text-danger" onclick="if(!confirm('Are you sure to delete?')) return false;">
+            					<h:commandLink action="#{itemBean.remove(item.id)}" styleClass="text-danger" onclick="if(!confirm('Are you sure to delete?')) return false;">
             						<i class="fas fa-minus fa-sm"></i> Remove
             					</h:commandLink>
             				</h:form>
@@ -74,7 +77,7 @@
 						<h:form styleClass="form" id="itemForm">
 							<div class="form-row">
 								<div class="col-4">
-									<h:graphicImage name="noimage.jpg" library="img" width="150" height="150"/>
+									<h:graphicImage name="#{empty itemBean.item.photo ? 'noimage.jpg' : itemBean.item.photo}" library="uploads" width="150" height="150"/>
 								</div>
 								<div class="col" style="font-size:0.9em">
 									<div class="row mb-2">

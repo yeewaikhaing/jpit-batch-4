@@ -15,7 +15,7 @@ import static javax.persistence.EnumType.STRING;
  *
  */
 @Entity
-@NamedQuery(name = "User.findAll",query = "SELECT u FROM Users u")
+@NamedQuery(name = "User.findAll",query = "SELECT u FROM Users u WHERE u.email <> :email")
 @NamedQuery(name="Users.findByEmail",query="SELECT u FROM Users u WHERE u.email = :email")
 @NamedQuery(name="User.findCount",query="SELECT COUNT(u) FROM Users u")
 public class Users implements Serializable {
