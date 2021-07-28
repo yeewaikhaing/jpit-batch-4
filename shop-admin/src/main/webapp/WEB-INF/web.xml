@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
-  <display-name>shop-admin</display-name>
+  <display-name>cloth-shop</display-name>
   <welcome-file-list>
     <welcome-file>index.xhtml</welcome-file>
   </welcome-file-list>
@@ -16,18 +16,17 @@
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   <security-constraint>
-  	<web-resource-collection>
-  		<web-resource-name>Admins</web-resource-name>
-  		<url-pattern>/admin/*</url-pattern>
-  	</web-resource-collection>
-  	<auth-constraint>
-  		<role-name>Admin</role-name>
-  		<role-name>Staff</role-name>
-  	</auth-constraint>
-  	
+    <web-resource-collection>
+      <web-resource-name>Admins</web-resource-name>
+      <url-pattern>/admin/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Admin</role-name>
+      <role-name>Staff</role-name>
+    </auth-constraint>
   </security-constraint>
   <error-page>
-  	<error-code>403</error-code>
-  	<location>/403.xhtml</location>
+    <error-code>403</error-code>
+    <location>/403.xhtml</location>
   </error-page>
 </web-app>
