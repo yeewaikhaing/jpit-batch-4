@@ -1,0 +1,60 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"> 
+
+<ui:composition template="/font-end/font-end-template.xhtml">
+	<ui:define name="title">Item|Detail</ui:define>
+	<ui:define name="breadcrumb">
+		<nav aria-label="breadcrumb">
+	        <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+              	<h:link outcome="/index" value="Home"/>
+              </li>
+              <li class="breadcrumb-item">
+              	<h:link outcome="/index" value="CategoryName"/>
+              </li>
+              <li class="breadcrumb-item">
+              	<h:link outcome="/index" value="BrandName"/>
+              </li>
+              <li aria-current="page" class="breadcrumb-item active">Item Detail</li>
+            </ol>        
+	    </nav>
+	</ui:define>
+	<ui:define name="righ-panel-contents">
+		<div class="col-lg-9 order-1 order-lg-2">
+           <div id="productMain" class="row">
+             <div class="col-md-6">
+               <div data-slider-id="1" class="owl-carousel shop-detail-carousel">
+                 <div class="item"><h:graphicImage library="uploads" name="product1.jpg" styleClass="img-fluid" /></div>
+              </div>
+             </div>
+             <div class="col-md-6">
+               <div class="box">
+                 <h1 class="text-center">White Blouse Armani</h1>
+                 
+                 <p class="price">$124.00</p>
+                 <p class="text-center buttons">
+                 	<a href="basket.html" class="btn btn-primary">
+                 		<i class="fa fa-shopping-cart"></i> Add to cart
+                 	</a>
+                 	<h:link outcome="/index" styleClass="btn btn-outline-primary">
+                 		<i class="fa fa-chevron-right"></i> Continue to Shopping
+                 	</h:link>
+                 	
+                 </p>
+               </div>
+               <div class="box">
+	             <h4>Product details</h4>
+	             <blockquote>
+	               <p><em>Define style this season with Armani's new range of trendy tops, crafted with intricate details. Create a chic statement look by teaming this lace number with skinny jeans and pumps.</em></p>
+	             </blockquote>
+	           </div>
+             </div>
+           </div>
+       </div>
+	</ui:define>
+</ui:composition>
+</html>

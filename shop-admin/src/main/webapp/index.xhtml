@@ -5,13 +5,126 @@
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:h="http://xmlns.jcp.org/jsf/html"> 
 
-<h:head>
-	<title>Shop</title>
-	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
-</h:head> 
-<body> 
-	<div class="container">
-		<h1> Shop Home Page</h1>
-	</div>
-</body> 
+<ui:composition template="/font-end/font-end-template.xhtml">
+	<ui:define name="righ-panel-contents">
+		<div class="col-lg-9">
+             <div class="row products">
+               <div class="col-lg-4 col-md-6">
+                 <div class="product">
+                   <div class="flip-container">
+                     <div class="flipper">
+                       <div class="front">
+                       		<h:link outcome="/public/item-detail">
+                       			<h:graphicImage library="uploads" name="product1.jpg" styleClass="img-fluid"/>
+                       		</h:link>
+                       </div>
+                       <div class="back">
+	                       	<h:link outcome="/public/item-detail">
+	                       		<h:graphicImage library="uploads" name="product1.jpg" styleClass="img-fluid"/>
+	                       	</h:link>
+                       </div>
+                     </div>
+                   </div>
+                   <h:link outcome="/public/item-detail" styleClass="invisible">
+               			<h:graphicImage library="uploads" name="product1.jpg" styleClass="img-fluid"/>
+               		</h:link>
+                  
+                   <div class="text">
+                     <h3><h:link outcome="/public/item-detail">Fur coat with very but very very long name</h:link></h3>
+                     <p class="price"> 
+                       $143.00
+                     </p>
+                     <p class="buttons">
+                     	<h:link outcome="/public/item-detail" styleClass="btn btn-outline-secondary">View detail</h:link>
+                     	<a href="basket.html" class="btn btn-primary">
+                     		<i class="fa fa-shopping-cart"></i>Add to cart
+                     	</a>
+                     </p>
+                   </div>
+                   <!-- /.text-->
+                 </div>
+                 <!-- /.product            -->
+               </div>
+               
+               <div class="col-lg-4 col-md-6">
+                 <div class="product">
+                   <div class="flip-container">
+                     <div class="flipper">
+                       <div class="front">
+                       		<h:link outcome="/public/item-detail">
+                       			<h:graphicImage library="uploads" name="product1.jpg" styleClass="img-fluid"/>
+                       		</h:link>
+                       </div>
+                       <div class="back">
+	                       	<h:link outcome="/public/item-detail">
+	                       		<h:graphicImage library="uploads" name="product1.jpg" styleClass="img-fluid"/>
+	                       	</h:link>
+                       </div>
+                     </div>
+                   </div>
+                   <h:link outcome="/public/item-detail" styleClass="invisible">
+               			<h:graphicImage library="uploads" name="product1.jpg" styleClass="img-fluid"/>
+               		</h:link>
+                  
+                   <div class="text">
+                     <h3><h:link outcome="/public/item-detail">Fur coat with very but very very long name</h:link></h3>
+                     <p class="price"> 
+                       $143.00
+                     </p>
+                     <p class="buttons">
+                     	<h:link outcome="/public/item-detail" styleClass="btn btn-outline-secondary">View detail</h:link>
+                     	<a href="basket.html" class="btn btn-primary">
+                     		<i class="fa fa-shopping-cart"></i>Add to cart
+                     	</a>
+                     </p>
+                   </div>
+                   <!-- /.text-->
+                 </div>
+                 <!-- /.product            -->
+               </div>
+               
+               <div class="col-lg-4 col-md-6">
+                 <div class="product">
+                   <div class="flip-container">
+                     <div class="flipper">
+                       <div class="front">
+                       		<h:link outcome="/public/item-detail">
+                       			<h:graphicImage library="uploads" name="product1.jpg" styleClass="img-fluid"/>
+                       		</h:link>
+                       </div>
+                       <div class="back">
+	                       	<h:link outcome="/public/item-detail">
+	                       		<h:graphicImage library="uploads" name="product1.jpg" styleClass="img-fluid"/>
+	                       	</h:link>
+                       </div>
+                     </div>
+                   </div>
+                   <h:link outcome="/public/item-detail" styleClass="invisible">
+               			<h:graphicImage library="uploads" name="product1.jpg" styleClass="img-fluid"/>
+               		</h:link>
+                  
+                   <div class="text">
+                     <h3><h:link outcome="/public/item-detail">Fur coat with very but very very long name</h:link></h3>
+                     <p class="price"> 
+                       $143.00
+                     </p>
+                     <p class="buttons">
+                     	<h:link outcome="/public/item-detail" styleClass="btn btn-outline-secondary">View detail</h:link>
+                     	<a href="basket.html" class="btn btn-primary">
+                     		<i class="fa fa-shopping-cart"></i>Add to cart
+                     	</a>
+                     </p>
+                   </div>
+                   <!-- /.text-->
+                 </div>
+                 <!-- /.product            -->
+               </div>
+             </div>
+             <div class="pages">
+               <p class="loadMore"><a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a></p>
+               
+             </div>
+           </div>
+	</ui:define>
+</ui:composition>
 </html>

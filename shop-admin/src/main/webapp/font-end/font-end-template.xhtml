@@ -1,0 +1,215 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"> 
+
+<h:head>
+	<meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>
+    	<ui:insert name="title">Home</ui:insert>
+    </title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="robots" content="all,follow"/>
+  
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+   	<h:outputStylesheet library="webjars" name="font-awesome/5.15.1/css/all.min-jsf.css"/>
+    <h:outputStylesheet library="vendor" name="fontawesome-free/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700"/>
+    
+    
+    <h:outputStylesheet library="vendor" name="owl.carousel/assets/owl.carousel.css"></h:outputStylesheet>
+    <h:outputStylesheet library="vendor" name="owl.carousel/assets/owl.theme.default.css"></h:outputStylesheet>
+   
+    <h:outputStylesheet library="css" name="style.default.css" id="theme-stylesheet"/>
+    <h:outputStylesheet library="css" name="custom.css"/>
+    
+    <ui:insert name="css"></ui:insert>
+</h:head> 
+<body>
+    <!-- navbar-->
+    <header class="header mb-5">
+      <!--
+      *** TOPBAR ***
+      _________________________________________________________
+      -->
+      <div id="top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 offer mb-3 mb-lg-0"><a href="#" class="btn btn-success btn-sm">Offer of the day</a><a href="#" class="ml-1">Get flat 35% off on orders over $50!</a></div>
+            <div class="col-lg-6 text-center text-lg-right">
+              <ul class="menu list-inline mb-0">
+                <li class="list-inline-item">
+                	<h:link outcome="/public/customer-login" value="Login"/>
+                </li>
+                <li class="list-inline-item">
+                	<h:link outcome="/public/customer-register" value="Register"/>
+                </li>
+                <li class="list-inline-item"><a href="contact.html">Contact</a></li>
+                <li class="list-inline-item">
+                	<h:link outcome="/public/customer-profile">
+                		<h:graphicImage library="img" name="undraw_profile.svg" width="30" height="30"/>
+                	</h:link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- *** TOP BAR END ***-->
+        
+        
+      </div>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <div id="navigation" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+             	 <a href="#" class="nav-link navbar-brand home">ShopMe</a>
+              </li>
+              
+            </ul>
+            <div class="navbar-buttons d-flex justify-content-end">
+              
+              <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block">
+              	<h:link outcome="/public/cart-info" styleClass="btn btn-primary navbar-btn">
+              		<i class="fa fa-shopping-cart"></i><span>3 items in cart</span>
+              	</h:link>
+              	
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+    </header>
+    <div id="all">
+      <div id="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+            <!-- breadcrumb-->
+              <ui:insert name="breadcrumb">
+	             <!--  <nav aria-label="breadcrumb">
+	                <ol class="breadcrumb">
+	                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+	                  <li aria-current="page" class="breadcrumb-item active">Ladies</li>
+	                </ol>
+	              </nav> -->
+              </ui:insert>
+            </div>
+            <!-- leff-side-bar -->
+            <ui:insert name="lef-side-bar">
+            	<div class="col-lg-3">
+	              <div class="card sidebar-menu mb-4">
+	                <div class="card-header">
+	                  <h3 class="h4 card-title">Categories</h3>
+	                </div>
+	                <div class="card-body">
+	                  <ul class="nav nav-pills flex-column category-menu">
+	                    <li><a href="category.html" class="nav-link">Men <span class="badge badge-secondary">42</span></a>
+	                      <ul class="list-unstyled">
+	                        <li><a href="category.html" class="nav-link">T-shirts</a></li>
+	                        <li><a href="category.html" class="nav-link">Shirts</a></li>
+	                        
+	                      </ul>
+	                    </li>
+	                    <li><a href="category.html" class="nav-link">Ladies  <span class="badge badge-secondary">123</span></a>
+	                      <ul class="list-unstyled">
+	                        <li><a href="category.html" class="nav-link">T-shirts</a></li>
+	                        <li><a href="category.html" class="nav-link">Skirts</a></li>
+	                        <li><a href="category.html" class="nav-link">Pants</a></li>
+	                        <li><a href="category.html" class="nav-link">Accessories</a></li>
+	                      </ul>
+	                    </li>
+	                    <li><a href="category.html" class="nav-link">Kids  <span class="badge badge-secondary">11</span></a>
+	                      <ul class="list-unstyled">
+	                        <li><a href="category.html" class="nav-link">T-shirts</a></li>
+	                        <li><a href="category.html" class="nav-link">Skirts</a></li>
+	                        <li><a href="category.html" class="nav-link">Pants</a></li>
+	                        <li><a href="category.html" class="nav-link">Accessories</a></li>
+	                      </ul>
+	                    </li>
+	                  </ul>
+	                </div>
+	              </div>
+	              <div class="card sidebar-menu mb-4">
+	                <div class="card-header">
+	                  <h3 class="h4 card-title">Brands</h3>
+	                </div>
+	                <div class="card-body">
+	                  <form>
+	                    <div class="form-group">
+	                      <div class="checkbox">
+	                        <label>
+	                          <input type="checkbox"/> Armani  (10)
+	                        </label>
+	                      </div>
+	                      <div class="checkbox">
+	                        <label>
+	                          <input type="checkbox"/> Versace  (12)
+	                        </label>
+	                      </div>
+	                      <div class="checkbox">
+	                        <label>
+	                          <input type="checkbox"/> Carlo Bruni  (15)
+	                        </label>
+	                      </div>
+	                      <div class="checkbox">
+	                        <label>
+	                          <input type="checkbox"/> Jack Honey  (14)
+	                        </label>
+	                      </div>
+	                    </div>
+	                   
+	                  </form>
+	                </div>
+	              </div>
+	              
+	              
+	            </div>
+            </ui:insert>
+            <!-- end of left-side-bar -->
+            <!-- right panel contents -->
+            <ui:insert name="righ-panel-contents">
+            	
+            </ui:insert>
+            <!-- end of right panel contents -->
+            <!-- /.col-lg-9-->
+          </div>
+        </div>
+      </div>
+    </div>
+   
+    <!--
+    *** COPYRIGHT ***
+    _________________________________________________________
+    -->
+    <div id="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mb-2 mb-lg-0">
+            <p class="text-center text-lg-left">©2019 Your name goes here.</p>
+          </div>
+          <div class="col-lg-6">
+            <p class="text-center text-lg-right">Template design by <a href="https://bootstrapious.com/">Bootstrapious</a>
+              <!-- If you want to remove this backlink, pls purchase an Attribution-free License @ https://bootstrapious.com/p/obaju-e-commerce-template. Big thanks!-->
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- *** COPYRIGHT END ***-->
+    <!-- JavaScript files-->
+    <h:outputScript library="vendor" name="jquery/jquery.min.js"/>
+   	<h:outputScript library="vendor" name="bootstrap/js/bootstrap.bundle.min.js"/>
+    <h:outputScript library="vendor" name="jquery.cookie/jquery.cookie.js"/>
+    <h:outputScript library="vendor" name="owl.carousel/owl.carousel.min.js"/>
+    <h:outputScript library="vendor" name="owl.carousel2.thumbs/owl.carousel2.thumbs.js"/>
+    <h:outputScript library="js" name="front.js"></h:outputScript>
+    <ui:insert name="js"></ui:insert>
+  </body>
+</html>

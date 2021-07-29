@@ -6,7 +6,7 @@
     <version>1.0 Final</version>
   </parent>
   <groupId>com.mmit.jpit</groupId>
-  <artifactId>cloth-shop</artifactId>
+  <artifactId>shop-admin</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
   <dependencies>
