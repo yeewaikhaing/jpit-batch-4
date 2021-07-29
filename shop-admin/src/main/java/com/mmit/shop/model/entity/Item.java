@@ -20,6 +20,9 @@ import static javax.persistence.EnumType.STRING;
 @Entity
 @NamedQuery(name="Item.findAll",query = "SELECT i From Item i")
 @NamedQuery(name="Item.findPhotoById",query="SELECT i.photo FROM Item i WHERE i.id = :itemId")
+@NamedQuery(name="Item.findByClothType",query="SELECT COUNT(i) FROM Item i WHERE i.type = :clothType")
+@NamedQuery(name="Item.findByCategory",query="SELECT i FROM Item i WHERE i.category.id = :category")
+@NamedQuery(name="Item.findByBrand",query="SELECT i FROM Item i WHERE i.brand.id = :brand")
 public class Item implements Serializable {
 
 	
@@ -56,7 +59,7 @@ public class Item implements Serializable {
 	private ClothType type;
 	
 	public enum ClothType{
-		Male,Female
+		Men,Ladies,Kids
 	}
 	public Item() {
 		super();

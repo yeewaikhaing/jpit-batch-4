@@ -71,10 +71,9 @@
 		       				</div>
 	             		</div>
 	             		<div class="form-inline ml-2 col">
-	             			<label class="mr-4">Gender</label>
+	             			<label class="mr-4">Cloth Types</label>
 	             			<h:selectOneMenu value="#{itemBean.item.type}" styleClass="form-control">
-	             				<f:selectItem itemValue="Male" itemLabel="Male"/>
-	             				<f:selectItem itemValue="Female" itemLabel="Female"/>
+	             				<f:selectItems value="#{itemBean.cothTypes}" var="type" itemValue="#{type}" itemLabel="#{type}"></f:selectItems>
 	             			</h:selectOneMenu>
 	             		</div>
 	             			

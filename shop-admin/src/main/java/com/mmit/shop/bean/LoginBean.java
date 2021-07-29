@@ -3,6 +3,7 @@ package com.mmit.shop.bean;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -32,6 +33,11 @@ public class LoginBean implements Serializable{
 	private SecurityContext sec_Context;
 	@Inject
 	private ExternalContext ex_Context;
+	
+	@PostConstruct
+	private void init() {
+		loginUser=new Users();
+	}
 	public String login() {
 		
 		HttpServletRequest req=(HttpServletRequest) ex_Context.getRequest();

@@ -25,6 +25,7 @@ public class Category implements Serializable {
 	private int id;
 	@Column(nullable = false, unique = true)
 	private String name;
+	
 	@CreationTimestamp
 	private LocalDate created_at;
 	@UpdateTimestamp
@@ -101,5 +102,6 @@ public class Category implements Serializable {
 			return false;
 		return true;
 	}
+	
    
 }

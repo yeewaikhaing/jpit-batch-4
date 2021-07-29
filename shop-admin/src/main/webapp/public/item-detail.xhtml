@@ -13,12 +13,7 @@
               <li class="breadcrumb-item">
               	<h:link outcome="/index" value="Home"/>
               </li>
-              <li class="breadcrumb-item">
-              	<h:link outcome="/index" value="CategoryName"/>
-              </li>
-              <li class="breadcrumb-item">
-              	<h:link outcome="/index" value="BrandName"/>
-              </li>
+              
               <li aria-current="page" class="breadcrumb-item active">Item Detail</li>
             </ol>        
 	    </nav>
@@ -28,12 +23,12 @@
            <div id="productMain" class="row">
              <div class="col-md-6">
                <div data-slider-id="1" class="owl-carousel shop-detail-carousel">
-                 <div class="item"><h:graphicImage library="uploads" name="product1.jpg" styleClass="img-fluid" /></div>
+                 <div class="item"><h:graphicImage library="uploads" name="#{empty itemBean.item.photo ? 'noimage.jpg' : itemBean.item.photo}" styleClass="img-fluid" /></div>
               </div>
              </div>
              <div class="col-md-6">
                <div class="box">
-                 <h1 class="text-center">White Blouse Armani</h1>
+                 <h1 class="text-center">#{itemBean.item.name} </h1>
                  
                  <p class="price">$124.00</p>
                  <p class="text-center buttons">
@@ -49,7 +44,7 @@
                <div class="box">
 	             <h4>Product details</h4>
 	             <blockquote>
-	               <p><em>Define style this season with Armani's new range of trendy tops, crafted with intricate details. Create a chic statement look by teaming this lace number with skinny jeans and pumps.</em></p>
+	               <p><em>#{itemBean.item.description} </em></p>
 	             </blockquote>
 	           </div>
              </div>

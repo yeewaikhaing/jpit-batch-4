@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 
 import com.mmit.shop.model.entity.Item;
+import com.mmit.shop.model.entity.Item.ClothType;
 import com.mmit.shop.model.service.ItemService;
 
 @Named
@@ -27,15 +29,22 @@ public class ItemBean implements Serializable{
 	
 	private Part imgPart;
 	
+	private Part uploadFile;
+	
 	private ServletContext s_context;
 	private String imgFolder=null;
+	
+	private List<Item> items;
 	@PostConstruct
 	private void init() {
-		String id=FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+		ExternalContext cxt=FacesContext.getCurrentInstance().getExternalContext();
+		String id=cxt.getRequestParameterMap().get("id");
 		if(id != null)
 			item=service.findById(Integer.parseInt(id));
 		else
 			item=new Item();
+		
+		
 		
 		s_context=(ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 		imgFolder=s_context.getRealPath("/resources/uploads");
@@ -94,12 +103,20 @@ public class ItemBean implements Serializable{
 		return "/admin/items?faces-redirect=true";
 	}
 	
+	public String upload() {
+		
+		return "/admin/items?faces-redirect=true";
+	}
+	
+	
+	
 	public void getItemInfo(int id) {
 		item=service.findById(id);
 	}
 	
 	public List<Item> getItems(){
-		return service.findAll();
+		items=service.findAll();
+		return items;
 	}
 
 
@@ -119,6 +136,16 @@ public class ItemBean implements Serializable{
 	public void setImgPart(Part imgPart) {
 		this.imgPart = imgPart;
 	}
+
+	public Part getUploadFile() {
+		return uploadFile;
+	}
+
+	public void setUploadFile(Part uploadFile) {
+		this.uploadFile = uploadFile;
+	}
 	
-	
+	public ClothType[] getCothTypes() {
+		return ClothType.values();
+	}
 }

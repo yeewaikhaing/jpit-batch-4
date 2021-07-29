@@ -42,7 +42,7 @@
             <div class="col-lg-6 offer mb-3 mb-lg-0"><a href="#" class="btn btn-success btn-sm">Offer of the day</a><a href="#" class="ml-1">Get flat 35% off on orders over $50!</a></div>
             <div class="col-lg-6 text-center text-lg-right">
               <ul class="menu list-inline mb-0">
-                <li class="list-inline-item">
+                <li class="list-inline-item #{loginBean.loginUser.id != 0 ? 'd-none' : ''}">
                 	<h:link outcome="/public/customer-login" value="Login"/>
                 </li>
                 <li class="list-inline-item">
@@ -109,30 +109,16 @@
 	                  <h3 class="h4 card-title">Categories</h3>
 	                </div>
 	                <div class="card-body">
-	                  <ul class="nav nav-pills flex-column category-menu">
-	                    <li><a href="category.html" class="nav-link">Men <span class="badge badge-secondary">42</span></a>
-	                      <ul class="list-unstyled">
-	                        <li><a href="category.html" class="nav-link">T-shirts</a></li>
-	                        <li><a href="category.html" class="nav-link">Shirts</a></li>
-	                        
-	                      </ul>
-	                    </li>
-	                    <li><a href="category.html" class="nav-link">Ladies  <span class="badge badge-secondary">123</span></a>
-	                      <ul class="list-unstyled">
-	                        <li><a href="category.html" class="nav-link">T-shirts</a></li>
-	                        <li><a href="category.html" class="nav-link">Skirts</a></li>
-	                        <li><a href="category.html" class="nav-link">Pants</a></li>
-	                        <li><a href="category.html" class="nav-link">Accessories</a></li>
-	                      </ul>
-	                    </li>
-	                    <li><a href="category.html" class="nav-link">Kids  <span class="badge badge-secondary">11</span></a>
-	                      <ul class="list-unstyled">
-	                        <li><a href="category.html" class="nav-link">T-shirts</a></li>
-	                        <li><a href="category.html" class="nav-link">Skirts</a></li>
-	                        <li><a href="category.html" class="nav-link">Pants</a></li>
-	                        <li><a href="category.html" class="nav-link">Accessories</a></li>
-	                      </ul>
-	                    </li>
+	                  <ul class="nav nav-pills flex-column category-menu list-unstyled">
+	                    <ui:repeat var="category" value="#{categoryBean.categories}">
+	                    	<li>
+	                    		<h:link outcome="/index" styleClass="nav-link">
+	                    			#{category.name}
+	                    			<f:param name="cid" value="#{category.id}"></f:param>
+	                    		</h:link>
+	                    		
+	                   		</li>
+	                    </ui:repeat>     
 	                  </ul>
 	                </div>
 	              </div>
@@ -141,31 +127,17 @@
 	                  <h3 class="h4 card-title">Brands</h3>
 	                </div>
 	                <div class="card-body">
-	                  <form>
-	                    <div class="form-group">
-	                      <div class="checkbox">
-	                        <label>
-	                          <input type="checkbox"/> Armani  (10)
-	                        </label>
-	                      </div>
-	                      <div class="checkbox">
-	                        <label>
-	                          <input type="checkbox"/> Versace  (12)
-	                        </label>
-	                      </div>
-	                      <div class="checkbox">
-	                        <label>
-	                          <input type="checkbox"/> Carlo Bruni  (15)
-	                        </label>
-	                      </div>
-	                      <div class="checkbox">
-	                        <label>
-	                          <input type="checkbox"/> Jack Honey  (14)
-	                        </label>
-	                      </div>
-	                    </div>
-	                   
-	                  </form>
+	                  	<ul class="nav nav-pills flex-column category-menu list-unstyled">
+		                    <ui:repeat var="brand" value="#{brandBean.brands}">
+		                    	<li>
+		                    		<h:link outcome="/index" styleClass="nav-link">
+		                    			#{brand.name}
+		                    			<f:param name="bid" value="#{brand.id}"></f:param>
+		                    		</h:link>
+		                    		
+		                   		</li>
+		                    </ui:repeat>     
+		                  </ul>
 	                </div>
 	              </div>
 	              

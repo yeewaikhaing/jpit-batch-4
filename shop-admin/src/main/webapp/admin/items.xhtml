@@ -9,7 +9,7 @@
 	<ui:define name="main-title">Item</ui:define>
 	<ui:define name="sub-title">All Item</ui:define>
 	<ui:define name="btn-action">
-		<a href="#" class="btn btn-danger btn-sm">
+		<a href="#" class="btn btn-danger btn-sm" id="upload">
 			<i class="fas fa-upload fa-sm"></i> Upload
 		</a>
 		<h:link outcome="/admin/item-add" styleClass="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
@@ -107,7 +107,20 @@
 					
 				</div>
 			</div>
+			<h:form enctype="multipart/form-data" styleClass="d-none">
+				<h:inputFile styleClass="file-upload" value="#{itemBean.uploadFile}"></h:inputFile>
+				<h:commandButton action="#{itemBean.upload()}" value="Upload" styleClass="upload-btn"/>
+			</h:form>
 		</div>
+	</ui:define>
+	<ui:define name="js">
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#upload').click(function(){
+						$('.file-upload').click();
+					});
+				});
+		</script>
 	</ui:define>
 </ui:composition>
 </html>
