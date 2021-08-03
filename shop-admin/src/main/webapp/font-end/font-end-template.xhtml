@@ -76,7 +76,8 @@
               
               <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block">
               	<h:link outcome="/public/cart-info" styleClass="btn btn-primary navbar-btn">
-              		<i class="fa fa-shopping-cart"></i><span>3 items in cart</span>
+              		<i class="fa fa-shopping-cart"></i>
+              		<span> <h:outputText value="#{cartBean.itemCount}" id="cartCount" /> items in cart</span>
               	</h:link>
               	
               </div>

@@ -58,13 +58,17 @@
 		                       ${item.price} Ks.
 		                     </p>
 		                     <p class="buttons">
-		                     	<h:link outcome="/public/item-detail" styleClass="btn btn-outline-secondary">
+		                     	<h:form>
+		                     		<h:link outcome="/public/item-detail" styleClass="btn btn-outline-secondary">
 		                     		View detail
-		                     		<f:param name="id" value="#{item.id}"></f:param>
-		                     	</h:link>
-		                     	<a href="basket.html" class="btn btn-primary">
-		                     		<i class="fa fa-shopping-cart"></i>Add to cart
-		                     	</a>
+			                     		<f:param name="id" value="#{item.id}"></f:param>
+			                     	</h:link>
+			                     	<h:commandLink action="#{cartBean.addToCart(item.id)}" styleClass="btn btn-primary ml-1">
+			                     		<i class="fa fa-shopping-cart"></i>Add to cart
+			                     		<f:ajax render="cartCount"></f:ajax>
+			                     	</h:commandLink>
+			                     	
+		                     	</h:form>
 		                     </p>
 		                   </div>
 		                   <!-- /.text-->
