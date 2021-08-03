@@ -51,6 +51,16 @@ public class CartBean implements Serializable {
 		
 		return "/public/cart-info?faces-redirect=true";
 	}
+	
+	public void updateCart(int itemId) {
+		for(OrderDetail od: order.getDetails()) {
+			if(od.getItem().getId() == itemId) {
+				if(od.getSubQty()<1) {
+					od.setSubQty(1);
+				}
+			}
+		}
+	}
 	public int getItemCount() {
 		return order.getDetails().size();
 	}

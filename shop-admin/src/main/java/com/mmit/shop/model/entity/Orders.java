@@ -9,13 +9,16 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.REMOVE;
 
 /**
  * Entity implementation class for Entity: Orders
  *
  */
 @Entity
-
+@NamedQuery(name="Orders.findAll",query="SELECT o FROM Orders o")
+@NamedQuery(name="Orders.findByCustomer",query="SELECT o FROM Orders o WHERE o.customer.id = :customerId")
 public class Orders implements Serializable {
 
 	
@@ -32,6 +35,13 @@ public class Orders implements Serializable {
 	private LocalDate receiveDate;
 	@OneToMany(mappedBy = "order", cascade = PERSIST)
 	private List<OrderDetail> details=new ArrayList<OrderDetail>();
+	@OneToOne(mappedBy = "order", cascade = { PERSIST, MERGE, REMOVE })
+	private Delivery delivery;
+	@Enumerated(EnumType.STRING)
+	private Status status;
+	public enum Status{
+		Pending,Received,Cancelled,Delivered
+	}
 	public Orders() {
 		super();
 	}
@@ -41,6 +51,10 @@ public class Orders implements Serializable {
 		details.add(od);
 	}
 	
+	public void addDelivery(Delivery deli) {
+		deli.setOrder(this);
+		this.setDelivery(deli);
+	}
 	public int getTotalQty() {
 		return details.stream().mapToInt(od-> od.getSubQty()).sum();
 	}
@@ -78,6 +92,22 @@ public class Orders implements Serializable {
 	}
 	public void setDetails(List<OrderDetail> details) {
 		this.details = details;
+	}
+
+	public Delivery getDelivery() {
+		return delivery;
+	}
+
+	public void setDelivery(Delivery delivery) {
+		this.delivery = delivery;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
    
 }

@@ -1,0 +1,114 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"> 
+
+<ui:composition template="/font-end/font-end-template.xhtml">
+	<ui:define name="title">Login</ui:define>
+	<ui:define name="breadcrumb">
+		<nav aria-label="breadcrumb">
+	        <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+              	<h:link outcome="/index" value="Home"/>
+              </li>
+              <li aria-current="page" class="breadcrumb-item active">My Orders</li>
+            </ol>        
+	    </nav>
+	</ui:define>
+	<ui:define name="lef-side-bar">
+		<div class="col-lg-3">
+	         <div class="card sidebar-menu">
+	           <div class="card-header">
+	             <h3 class="h4 card-title">Customer section</h3>
+	           </div>
+	           <div class="card-body">
+	             <h:form>
+	             	<ul class="nav nav-pills flex-column">
+	             	<h:link outcome="/public/customer-orders" styleClass="nav-link #{(view.viewId eq '/public/customer-orders.xhtml' or view.viewId eq '/public/customer-order.xhtml') ? 'active' : ''}">
+	             		<i class="fa fa-list"></i> My orders
+	             	</h:link>
+	        		<h:link outcome="/public/customer-profile" styleClass="nav-link #{view.viewId eq '/public/customer-profile.xhtml' ? 'active' : ''}">
+	             		<i class="fa fa-user"></i> My account
+	             	</h:link>
+	             	<h:commandLink action="#{logOutBean.logout()}">
+	             		<i class="fa fa-sign-out"></i> Logout
+	             	</h:commandLink>
+	             	
+	             </ul>
+	             </h:form>
+	           </div>
+	         </div>
+	   </div>
+	</ui:define>
+	<ui:define name="righ-panel-contents">
+		<div id="customer-order" class="col-lg-9">
+          <div class="box">
+            <h1>Order (CODE - #{myOrderBean.order.id})</h1>
+            <p class="lead">
+            	Order (CODE - #{myOrderBean.order.id}) was placed on 
+            	<strong>#{myOrderBean.order.orderDate}</strong> 
+            	and is currently 
+            	<strong>#{myOrderBean.order.status}</strong>.
+            </p>
+            <p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
+            <hr/>
+            <div class="table-responsive mb-4">
+            	<h:dataTable styleClass="table" value="#{myOrderBean.order.details}" var="od">
+            		<h:column>
+            			<f:facet name="header">Item</f:facet>
+            			<h:graphicImage alt="#{od.item.name}" library="css" name="#{empty od.item.photo ? 'noimage.jpg' : od.item.photo}" />
+            		</h:column>
+            		<h:column>
+            			<f:facet name="header">Name</f:facet>
+            			<h:link outcome="/public/item-detail" value="#{od.item.name}">
+            				<f:param name="id" value="#{od.item.id}"></f:param>
+            			</h:link>
+            		</h:column>
+            		<h:column>
+            			<f:facet name="header">Unit Price</f:facet>
+            			<h:outputText value="#{od.item.price}">
+            				<f:convertNumber type="currency" currencySymbol="Ks."/>
+            			</h:outputText>
+            		</h:column>
+            		<h:column>
+            			<f:facet name="header">Quantity</f:facet>
+            			#{od.subQty}
+            		</h:column>
+            		
+            		<h:column>
+            			<f:facet name="header">Total</f:facet>
+            			<h:outputText value="#{od.subPrice}">
+            				<f:convertNumber type="currency" currencySymbol="Ks."/>
+            			</h:outputText>
+            		</h:column>
+            		
+            	</h:dataTable>
+              
+            </div>
+            <hr />
+            <!-- /.table-responsive-->
+            <div class="row addresses">
+              <div class="col-lg-6">
+                <h2>Invoice address</h2>
+                <p>
+                	#{myOrderBean.order.customer.username}<br />
+                	#{myOrderBean.order.customer.phone} <br />
+                	#{myOrderBean.order.customer.address}
+                </p>
+              </div>
+              <div class="col-lg-6">
+                <h2>Shipping address</h2>
+                <p>
+                	#{myOrderBean.order.delivery.receiverName}<br/>
+                	#{myOrderBean.order.delivery.receiverPhone} <br/>
+                	#{myOrderBean.order.delivery.receiverPhone}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+	</ui:define>
+</ui:composition>
+</html>

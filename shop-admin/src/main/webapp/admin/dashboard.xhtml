@@ -9,9 +9,7 @@
 		<ui:define name="main-title">Orders</ui:define>
 		<ui:define name="sub-title">Order List</ui:define>
 		<ui:define name="btn-action">
-			<a href="#" class="btn btn-primary">
-				<i class="fas fa-plus"></i> Add
-			</a>
+			
 		</ui:define>
 		<ui:define name="main-contents">
 		
@@ -21,60 +19,141 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        
-                                       
-                                       
-                                        
-                                        <tr>
-                                            <td>Shad Decker</td>
-                                            <td>Regional Director</td>
-                                            <td>Edinburgh</td>
-                                            <td>51</td>
-                                            <td>2008/11/13</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>29</td>
-                                            <td>2011/06/27</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>27</td>
-                                            <td>2011/01/25</td>
-                                            <td>$112,000</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            	<h:dataTable binding="#{tb}" value="#{orderBean.orders}" var="o" styleClass="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            		<h:column>
+                            			<f:facet name="header">No</f:facet>
+                            			#{tb.rowIndex+1}
+                            		</h:column>
+                            		<h:column>
+                            			<f:facet name="header">Order Code</f:facet>
+                            			<h:commandLink action="#{orderBean.retrieveOrderDetails(o)}" onclick="$('#detailModal').modal('show')">
+                            				 <span>CODE - </span>#{o.id}
+                            				 <f:ajax render="order-detail"></f:ajax>
+                            			</h:commandLink>
+                            		</h:column>
+                            		<h:column>
+                            			<f:facet name="header">Customer</f:facet>
+                            			<h:commandLink onclick="$('#customerModal').modal('show')">
+                            				#{o.customer.username}
+                            				<f:ajax render="customerInfo" listener="#{orderBean.retrieveCustomerInfo(o)}"></f:ajax>
+                            			</h:commandLink>
+                            		</h:column>
+                            		<h:column>
+                            			<f:facet name="header">Amount</f:facet>
+                            			<h:outputText value="#{o.totalAmount}">
+                            				<f:convertNumber type="currency" currencySymbol="Ks."/>
+                            			</h:outputText>
+                            		</h:column>
+                            		<h:column>
+                            			<f:facet name="header">Order Date</f:facet>
+                            			#{o.orderDate}
+                            		</h:column>
+                            		<h:column>
+                            			<f:facet name="header">Status</f:facet>
+                            			#{o.status}
+                            		</h:column>
+                            		<h:column>
+                            			<f:facet name="header">Action</f:facet>
+                            		</h:column>
+                            	</h:dataTable>
+                                
                             </div>
                         </div>
+                    </div>
+                    <div id="detailModal" class="modal fade">
+                    	<div class="modal-dialog">
+                    		<div class="modal-content">
+                    			<div class="modal-header">
+                    				<h5 class="modal-title">Order Detail</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">x</span>
+							        </button>
+                    			</div>
+                    			<div class="modal-body">
+                    				<h:dataTable styleClass="table table-bordered" id="order-detail" var="od" value="#{orderBean.orderDetails}">
+                    					<h:column>
+                    						<f:facet name="header">Product</f:facet>
+                    						#{od.item.name}
+                    					</h:column>
+                    					<h:column>
+                    						<f:facet name="header">Price</f:facet>
+                    						<h:outputText value="#{od.item.price}">
+                    							<f:convertNumber type="currency" currencySymbol="Ks."/>
+                    						</h:outputText>
+                    					</h:column>
+                    					<h:column>
+                    						<f:facet name="header">Qty</f:facet>
+                    						#{od.subQty}
+                    					</h:column>
+                    					<h:column>
+                    						<f:facet name="header">Sub Price</f:facet>
+                    						<h:outputText value="#{od.subPrice}">
+                    							<f:convertNumber type="currency" currencySymbol="Ks."/>
+                    						</h:outputText>
+                    					</h:column>
+                    				</h:dataTable>
+                    				
+                    			</div>
+                    			
+                    		</div>
+                    	</div>
+                    </div>
+                    <div class="modal fade" id="customerModal">
+                    	<div class="modal-dialog modal-lg p-4">
+                    		<div class="modal-content">
+                    			<div class="modal-header">
+							        <h5 class="modal-title">Customer/Shipping Info</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">x</span>
+							        </button>
+						      	</div>
+						      	<h:panelGroup id="customerInfo" styleClass="modal-body">
+						      		<div class="row">
+						      			<div class="col-md-6 offset-1">
+						      				<div class="box text-secondary">
+						      					<h5>Customer Info</h5>
+						      					<div class="content py-3">
+						      						<div class="form-row">
+						      							<label class="col-md-4">Customer</label>
+						      							<h:outputText value="#{orderBean.customer.username}" styleClass="col"/>
+						      						</div>
+						      						<div class="form-row">
+						      							<label class="col-md-4">Phone</label>
+						      							<h:outputText value="#{orderBean.customer.phone}" styleClass="col"/>
+						      						</div>
+						      						<div class="form-row">
+						      							<label class="col-md-4">Address</label>
+						      							<h:outputText value="#{orderBean.customer.address}" styleClass="col"/>
+						      						</div>
+						      					</div>
+						      				</div>
+						      			</div>
+						      			<div class="col">
+						      				<div class="box text-primary">
+						      					<h5>Shipping Info</h5>
+						      					<div class="content py-3">
+						      						<div class="form-row">
+						      							<label class="col-md-4">Receiver</label>
+						      							<h:outputText value="#{orderBean.delivery.receiverName}" styleClass="col"/>
+						      						</div>
+						      						<div class="form-row">
+						      							<label class="col-md-4">Phone</label>
+						      							<h:outputText value="#{orderBean.delivery.receiverPhone}" styleClass="col"/>
+						      						</div>
+						      						<div class="form-row">
+						      							<label class="col-md-4">Address</label>
+						      							<h:outputText value="#{orderBean.delivery.receiverAddress}" styleClass="col"/>
+						      						</div>
+						      					</div>
+						      				</div>
+						      			</div>
+						      		</div>
+						      	</h:panelGroup>
+						      	<!-- <div class="modal-body">
+						      		
+						      	</div> -->
+                    		</div>
+                    	</div>
                     </div>
 		</ui:define>
 	</ui:composition>
