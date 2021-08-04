@@ -1,5 +1,6 @@
 package com.mmit.shop.model.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -56,5 +57,17 @@ public class OrderService {
 		List<OrderDetail> details=order.getDetails();
 		details.forEach(od->{});
 		return order;
+	}
+	public void changeStatus(String status, long orderId) {
+		Orders order=findById(orderId);
+		if(status.equals(Status.Received.name())) {
+			order.setStatus(Status.Received);
+			order.setReceiveDate(LocalDate.now());
+		}
+		else if(status.equals(Status.Delivered.name())) {
+			order.setStatus(Status.Delivered);
+			order.getDelivery().setDeliverDate(LocalDate.now());
+		}
+		em.flush();
 	}
 }

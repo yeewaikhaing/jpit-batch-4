@@ -18,7 +18,8 @@
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <h:form>
+                            	<div class="table-responsive">
                             	<h:dataTable binding="#{tb}" value="#{orderBean.orders}" var="o" styleClass="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             		<h:column>
                             			<f:facet name="header">No</f:facet>
@@ -50,14 +51,24 @@
                             		</h:column>
                             		<h:column>
                             			<f:facet name="header">Status</f:facet>
-                            			#{o.status}
+                            			<h:outputText value="#{o.status}" styleClass="badge badge-warning" rendered="#{o.status == 'Pending'}"/>
+                            			<h:outputText value="#{o.status}" styleClass="badge badge-success" rendered="#{o.status == 'Received'}"/>
+                            			<h:outputText value="#{o.status} (#{o.delivery.deliverDate})" styleClass="badge badge-info" rendered="#{o.status == 'Delivered'}"/>
+                            			
                             		</h:column>
                             		<h:column>
                             			<f:facet name="header">Action</f:facet>
+                            			<h:commandLink action="#{orderBean.changeOrderStatus('Received',o.id)}" value="Receive" styleClass="btn btn-primary btn-sm" rendered="#{o.status == 'Pending'}">
+                            				<f:ajax render="@form"></f:ajax>
+                            			</h:commandLink>
+                            			<h:commandLink action="#{orderBean.changeOrderStatus('Delivered',o.id)}" value="Deliver" styleClass="btn btn-danger btn-sm" rendered="#{o.status == 'Received'}">
+                            				<f:ajax render="@form"></f:ajax>
+                            			</h:commandLink>
                             		</h:column>
                             	</h:dataTable>
                                 
                             </div>
+                            </h:form>
                         </div>
                     </div>
                     <div id="detailModal" class="modal fade">

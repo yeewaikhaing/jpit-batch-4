@@ -12,6 +12,7 @@ import javax.inject.Named;
 import com.mmit.shop.model.entity.Delivery;
 import com.mmit.shop.model.entity.OrderDetail;
 import com.mmit.shop.model.entity.Orders;
+import com.mmit.shop.model.entity.Orders.Status;
 import com.mmit.shop.model.entity.Users;
 import com.mmit.shop.model.service.OrderService;
 
@@ -53,6 +54,11 @@ public class OrderBean implements Serializable{
 				return;
 			}
 		});
+	}
+	
+	public void changeOrderStatus(String status,long orderId) {
+		service.changeStatus(status,orderId);
+		orders=service.findAll();
 	}
 	public List<Orders> getOrders() {
 		

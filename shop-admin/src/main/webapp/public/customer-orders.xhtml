@@ -65,7 +65,9 @@
               		</h:column>
               		<h:column>
               			<f:facet name="header">Status</f:facet>
-              			<span class="badge badge-warning">#{o.status}</span>
+              			<h:outputText value="#{o.status}" styleClass="badge badge-warning" rendered="#{o.status == 'Pending'}"/>
+               			<h:outputText value="#{o.status}" styleClass="badge badge-success" rendered="#{o.status == 'Received'}"/>
+               			<h:outputText value="#{o.status} (#{o.delivery.deliverDate})" styleClass="badge badge-info" rendered="#{o.status == 'Delivered'}"/>
               		</h:column>
               		<h:column>
               			<f:facet name="header">Action</f:facet>
